@@ -19,6 +19,8 @@ public class PerlinNoise : MonoBehaviour
     public float offsetX = 100f;
     public float offsetY = 100f;
 
+    public float speed = 15f;
+
     void Start()
     {
         //Give random value to our offsets so each time we run the game we get a new map
@@ -35,6 +37,22 @@ public class PerlinNoise : MonoBehaviour
         //3) And then change the texture
         Renderer renderer =  GetComponent<Renderer>(); //store the renderer in a variable
         renderer.material.mainTexture = GenerateTexture(); //change our texture
+
+        //Control zoom in and zoom out in the map
+        if (Input.GetKey("x"))
+            scale = scale + 2;
+        if (Input.GetKey("z"))
+            scale = scale - 2;
+
+        //Control movement in the map
+        if (Input.GetKey("a"))
+            offsetX = offsetX - 0.2f;
+        if (Input.GetKey("d"))
+            offsetX = offsetX + 0.2f;
+        if (Input.GetKey("w"))
+            offsetY = offsetY + 0.2f;
+        if (Input.GetKey("s"))
+            offsetY = offsetY - 0.2f;
     }
 
     //Since we need to return the texture we set the type of the function to Texture2D
